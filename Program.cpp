@@ -1,5 +1,4 @@
 #include "./Forms/AuthForm.h"
-#include "Database.h";
 
 using namespace System;
 using namespace System::Windows::Forms;

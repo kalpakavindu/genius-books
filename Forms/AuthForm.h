@@ -1,4 +1,7 @@
 #pragma once
+#include "../Panels/LoginPanel.h";
+#include "../Panels/RegisterPanel.h";
+
 
 namespace GeniusBooks {
 
@@ -14,6 +17,11 @@ namespace GeniusBooks {
 	/// </summary>
 	public ref class AuthForm : public System::Windows::Forms::Form
 	{
+	private:
+		LoginPanel^ login_panel = gcnew LoginPanel();
+		RegisterPanel^ register_panel = gcnew RegisterPanel();
+		int currentPanel = 1;
+
 	public:
 		AuthForm(void)
 		{
@@ -21,6 +29,10 @@ namespace GeniusBooks {
 			//
 			//TODO: Add the constructor code here
 			//
+			login_panel->TopLevel = false;
+			register_panel->TopLevel = false;
+
+			setPanel();
 		}
 
 	protected:
@@ -36,7 +48,8 @@ namespace GeniusBooks {
 		}
 	private: System::Windows::Forms::Panel^ mainPanel;
 	private: System::Windows::Forms::Label^ labelQue;
-	private: System::Windows::Forms::LinkLabel^ signupLink;
+	private: System::Windows::Forms::LinkLabel^ labelLink;
+
 	private: System::Windows::Forms::Panel^ panel1;
 	protected:
 
@@ -56,7 +69,7 @@ namespace GeniusBooks {
 		{
 			this->mainPanel = (gcnew System::Windows::Forms::Panel());
 			this->labelQue = (gcnew System::Windows::Forms::Label());
-			this->signupLink = (gcnew System::Windows::Forms::LinkLabel());
+			this->labelLink = (gcnew System::Windows::Forms::LinkLabel());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->panel1->SuspendLayout();
 			this->SuspendLayout();
@@ -80,23 +93,28 @@ namespace GeniusBooks {
 			this->labelQue->TabIndex = 1;
 			this->labelQue->Text = L"Don\'t have an account \?";
 			// 
-			// signupLink
+			// labelLink
 			// 
-			this->signupLink->AutoSize = true;
-			this->signupLink->Location = System::Drawing::Point(163, 6);
-			this->signupLink->Name = L"signupLink";
-			this->signupLink->Size = System::Drawing::Size(55, 18);
-			this->signupLink->TabIndex = 2;
-			this->signupLink->TabStop = true;
-			this->signupLink->Text = L"Sign Up";
+			this->labelLink->AutoSize = true;
+			this->labelLink->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->labelLink->LinkBehavior = System::Windows::Forms::LinkBehavior::HoverUnderline;
+			this->labelLink->LinkColor = System::Drawing::Color::RoyalBlue;
+			this->labelLink->Location = System::Drawing::Point(178, 6);
+			this->labelLink->Name = L"labelLink";
+			this->labelLink->Size = System::Drawing::Size(55, 18);
+			this->labelLink->TabIndex = 2;
+			this->labelLink->TabStop = true;
+			this->labelLink->Text = L"Sign up";
+			this->labelLink->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &AuthForm::labelLink_LinkClicked);
 			// 
 			// panel1
 			// 
 			this->panel1->Controls->Add(this->labelQue);
-			this->panel1->Controls->Add(this->signupLink);
+			this->panel1->Controls->Add(this->labelLink);
 			this->panel1->Location = System::Drawing::Point(274, 343);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(221, 30);
+			this->panel1->Size = System::Drawing::Size(238, 30);
 			this->panel1->TabIndex = 3;
 			// 
 			// AuthForm
@@ -108,18 +126,46 @@ namespace GeniusBooks {
 			this->Controls->Add(this->mainPanel);
 			this->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->MaximizeBox = false;
 			this->MaximumSize = System::Drawing::Size(800, 450);
 			this->MinimizeBox = false;
 			this->MinimumSize = System::Drawing::Size(800, 450);
 			this->Name = L"AuthForm";
-			this->Text = L"Authentication";
+			this->Text = L"Sign in to your account";
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
-	};
+	private: void setPanel() {
+		if (currentPanel == 1) {
+			this->Text = "Sign in to your account";
+			this->labelQue->Text = "Don't have an account ?";
+			this->labelLink->Text = "Sign up";
+			
+			mainPanel->Controls->Clear();
+			mainPanel->Controls->Add(login_panel);
+			login_panel->Show();
+		}else{
+			this->Text = "Create new account";
+			this->labelQue->Text = "Already have an account ?";
+			this->labelLink->Text = "Sign in";
+
+			mainPanel->Controls->Clear();
+			mainPanel->Controls->Add(register_panel);
+			register_panel->Show();
+		}
+	}
+
+	private: System::Void labelLink_LinkClicked(
+		System::Object^ sender, 
+		System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e
+	) {
+		currentPanel = currentPanel == 1 ? 2 : 1;
+		setPanel();
+	}
+};
 }
