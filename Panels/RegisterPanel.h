@@ -35,10 +35,10 @@ namespace GeniusBooks {
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::TextBox^ fnameInput;
-	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::TextBox^ lnameInput;
+
+
+
+
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::TextBox^ emailInput;
 	private: System::Windows::Forms::Label^ label5;
@@ -62,10 +62,6 @@ namespace GeniusBooks {
 		void InitializeComponent(void)
 		{
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->fnameInput = (gcnew System::Windows::Forms::TextBox());
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->lnameInput = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->emailInput = (gcnew System::Windows::Forms::TextBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
@@ -82,45 +78,11 @@ namespace GeniusBooks {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Mulish ExtraBold", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(283, 19);
+			this->label1->Location = System::Drawing::Point(257, 75);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(218, 28);
+			this->label1->Size = System::Drawing::Size(258, 28);
 			this->label1->TabIndex = 1;
-			this->label1->Text = L"Create new account";
-			// 
-			// label2
-			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(207, 72);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(71, 18);
-			this->label2->TabIndex = 2;
-			this->label2->Text = L"First name";
-			// 
-			// fnameInput
-			// 
-			this->fnameInput->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->fnameInput->Location = System::Drawing::Point(210, 93);
-			this->fnameInput->Name = L"fnameInput";
-			this->fnameInput->Size = System::Drawing::Size(180, 24);
-			this->fnameInput->TabIndex = 3;
-			// 
-			// label3
-			// 
-			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(402, 72);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(71, 18);
-			this->label3->TabIndex = 4;
-			this->label3->Text = L"Last name";
-			// 
-			// lnameInput
-			// 
-			this->lnameInput->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->lnameInput->Location = System::Drawing::Point(405, 93);
-			this->lnameInput->Name = L"lnameInput";
-			this->lnameInput->Size = System::Drawing::Size(180, 24);
-			this->lnameInput->TabIndex = 5;
+			this->label1->Text = L"Sign up to your account";
 			// 
 			// label4
 			// 
@@ -203,10 +165,6 @@ namespace GeniusBooks {
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->emailInput);
 			this->Controls->Add(this->label4);
-			this->Controls->Add(this->lnameInput);
-			this->Controls->Add(this->label3);
-			this->Controls->Add(this->fnameInput);
-			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));

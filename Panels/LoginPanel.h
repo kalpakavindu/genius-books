@@ -71,7 +71,7 @@ namespace GeniusBooks {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Mulish ExtraBold", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(257, 19);
+			this->label1->Location = System::Drawing::Point(257, 75);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(251, 28);
 			this->label1->TabIndex = 0;
@@ -82,7 +82,7 @@ namespace GeniusBooks {
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->Location = System::Drawing::Point(207, 120);
+			this->label2->Location = System::Drawing::Point(207, 133);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(92, 18);
 			this->label2->TabIndex = 1;
@@ -91,7 +91,7 @@ namespace GeniusBooks {
 			// emailInput
 			// 
 			this->emailInput->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->emailInput->Location = System::Drawing::Point(210, 141);
+			this->emailInput->Location = System::Drawing::Point(210, 154);
 			this->emailInput->Name = L"emailInput";
 			this->emailInput->Size = System::Drawing::Size(375, 24);
 			this->emailInput->TabIndex = 2;
@@ -99,7 +99,7 @@ namespace GeniusBooks {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(207, 188);
+			this->label3->Location = System::Drawing::Point(207, 200);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(67, 18);
 			this->label3->TabIndex = 3;
@@ -108,7 +108,7 @@ namespace GeniusBooks {
 			// passwordInput
 			// 
 			this->passwordInput->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->passwordInput->Location = System::Drawing::Point(210, 209);
+			this->passwordInput->Location = System::Drawing::Point(210, 221);
 			this->passwordInput->Name = L"passwordInput";
 			this->passwordInput->Size = System::Drawing::Size(375, 24);
 			this->passwordInput->TabIndex = 4;
