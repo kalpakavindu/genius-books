@@ -121,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Database.cpp" />
+    <ClCompile Include="Forms\AdminForm.cpp" />
     <ClCompile Include="Forms\AuthForm.cpp" />
     <ClCompile Include="Panels\LoginPanel.cpp" />
     <ClCompile Include="Panels\RegisterPanel.cpp" />
@@ -128,6 +129,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Database.h" />
+    <ClInclude Include="Forms\AdminForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Forms\AuthForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -139,6 +143,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\AdminForm.resx">
+      <DependentUpon>Forms\AdminForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AuthForm.resx">
       <DependentUpon>Forms\AuthForm.h</DependentUpon>
     </EmbeddedResource>

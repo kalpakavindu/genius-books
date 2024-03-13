@@ -1,4 +1,4 @@
-#include "./Forms/AuthForm.h"
+#include "./Forms/AdminForm.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -8,7 +8,7 @@ using namespace System::Windows::Forms;
 void main(array<String^>^ args) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-	GeniusBooks::AuthForm authForm;
+	GeniusBooks::AdminForm authForm;
 
 	Application::Run(% authForm);
 }

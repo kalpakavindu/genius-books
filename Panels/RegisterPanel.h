@@ -194,6 +194,7 @@ namespace GeniusBooks {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 18);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::Azure;
 			this->ClientSize = System::Drawing::Size(784, 337);
 			this->Controls->Add(this->submitBtn);
 			this->Controls->Add(this->cpasswordInput);
@@ -210,7 +211,7 @@ namespace GeniusBooks {
 			this->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"RegisterPanel";

@@ -121,6 +121,7 @@ namespace GeniusBooks {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 18);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::Azure;
 			this->ClientSize = System::Drawing::Size(784, 411);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->mainPanel);
