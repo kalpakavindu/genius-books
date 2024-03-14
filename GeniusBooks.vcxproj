@@ -120,7 +120,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Database.cpp" />
     <ClCompile Include="Forms\AdminForm.cpp" />
     <ClCompile Include="Forms\AuthForm.cpp" />
     <ClCompile Include="Panels\BooksPanel.cpp" />
@@ -129,6 +128,9 @@
     <ClCompile Include="Panels\RegisterPanel.cpp" />
     <ClCompile Include="Panels\SuppliersPanel.cpp" />
     <ClCompile Include="Panels\UsersPanel.cpp" />
+    <ClCompile Include="Popups\BookDetailsPopup.cpp" />
+    <ClCompile Include="Popups\SupplierDetailsPopup.cpp" />
+    <ClCompile Include="Popups\UserDetailsPopup.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +159,15 @@
     <ClInclude Include="Panels\UsersPanel.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Popups\BookDetailsPopup.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Popups\SupplierDetailsPopup.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Popups\UserDetailsPopup.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\AdminForm.resx">
@@ -182,6 +193,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Panels\UsersPanel.resx">
       <DependentUpon>Panels\UsersPanel.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Popups\BookDetailsPopup.resx">
+      <DependentUpon>Popups\BookDetailsPopup.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Popups\SupplierDetailsPopup.resx">
+      <DependentUpon>Popups\SupplierDetailsPopup.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Popups\UserDetailsPopup.resx">
+      <DependentUpon>Popups\UserDetailsPopup.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
