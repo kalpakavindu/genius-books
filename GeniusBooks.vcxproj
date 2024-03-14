@@ -123,8 +123,12 @@
     <ClCompile Include="Database.cpp" />
     <ClCompile Include="Forms\AdminForm.cpp" />
     <ClCompile Include="Forms\AuthForm.cpp" />
+    <ClCompile Include="Panels\BooksPanel.cpp" />
+    <ClCompile Include="Panels\DashboardPanel.cpp" />
     <ClCompile Include="Panels\LoginPanel.cpp" />
     <ClCompile Include="Panels\RegisterPanel.cpp" />
+    <ClCompile Include="Panels\SuppliersPanel.cpp" />
+    <ClCompile Include="Panels\UsersPanel.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -135,10 +139,22 @@
     <ClInclude Include="Forms\AuthForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Panels\BooksPanel.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Panels\DashboardPanel.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Panels\LoginPanel.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Panels\RegisterPanel.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Panels\SuppliersPanel.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Panels\UsersPanel.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -149,11 +165,23 @@
     <EmbeddedResource Include="Forms\AuthForm.resx">
       <DependentUpon>Forms\AuthForm.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BooksPanel.resx">
+      <DependentUpon>Panels\BooksPanel.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DashboardPanel.resx">
+      <DependentUpon>Panels\DashboardPanel.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Panels\LoginPanel.resx">
       <DependentUpon>Panels\LoginPanel.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Panels\RegisterPanel.resx">
       <DependentUpon>Panels\RegisterPanel.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\SuppliersPanel.resx">
+      <DependentUpon>Panels\SuppliersPanel.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\UsersPanel.resx">
+      <DependentUpon>Panels\UsersPanel.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

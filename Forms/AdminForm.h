@@ -44,6 +44,7 @@ namespace GeniusBooks {
 	private: System::Windows::Forms::Button^ booksBtn;
 	private: System::Windows::Forms::Button^ signOutBtn;
 	private: System::Windows::Forms::Panel^ mainPanel;
+	private: System::Windows::Forms::Button^ profileBtn;
 
 	private:
 		/// <summary>
@@ -59,18 +60,20 @@ namespace GeniusBooks {
 		void InitializeComponent(void)
 		{
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->dashboardBtn = (gcnew System::Windows::Forms::Button());
-			this->booksBtn = (gcnew System::Windows::Forms::Button());
-			this->supliersBtn = (gcnew System::Windows::Forms::Button());
-			this->usersBtn = (gcnew System::Windows::Forms::Button());
 			this->signOutBtn = (gcnew System::Windows::Forms::Button());
+			this->usersBtn = (gcnew System::Windows::Forms::Button());
+			this->supliersBtn = (gcnew System::Windows::Forms::Button());
+			this->booksBtn = (gcnew System::Windows::Forms::Button());
+			this->dashboardBtn = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->mainPanel = (gcnew System::Windows::Forms::Panel());
+			this->profileBtn = (gcnew System::Windows::Forms::Button());
 			this->panel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// panel1
 			// 
+			this->panel1->Controls->Add(this->profileBtn);
 			this->panel1->Controls->Add(this->signOutBtn);
 			this->panel1->Controls->Add(this->usersBtn);
 			this->panel1->Controls->Add(this->supliersBtn);
@@ -83,62 +86,27 @@ namespace GeniusBooks {
 			this->panel1->Size = System::Drawing::Size(183, 561);
 			this->panel1->TabIndex = 0;
 			// 
-			// label1
+			// signOutBtn
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Mulish ExtraBold", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->signOutBtn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->signOutBtn->BackColor = System::Drawing::Color::Azure;
+			this->signOutBtn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->signOutBtn->FlatAppearance->BorderSize = 0;
+			this->signOutBtn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->signOutBtn->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(25, 9);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(136, 26);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"Genius Books";
-			// 
-			// dashboardBtn
-			// 
-			this->dashboardBtn->BackColor = System::Drawing::Color::LightCyan;
-			this->dashboardBtn->FlatAppearance->BorderSize = 0;
-			this->dashboardBtn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->dashboardBtn->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->dashboardBtn->Location = System::Drawing::Point(3, 50);
-			this->dashboardBtn->Name = L"dashboardBtn";
-			this->dashboardBtn->Size = System::Drawing::Size(177, 35);
-			this->dashboardBtn->TabIndex = 1;
-			this->dashboardBtn->Text = L"Dashboard";
-			this->dashboardBtn->UseVisualStyleBackColor = false;
-			// 
-			// booksBtn
-			// 
-			this->booksBtn->BackColor = System::Drawing::Color::LightCyan;
-			this->booksBtn->FlatAppearance->BorderSize = 0;
-			this->booksBtn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->booksBtn->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->booksBtn->Location = System::Drawing::Point(3, 91);
-			this->booksBtn->Name = L"booksBtn";
-			this->booksBtn->Size = System::Drawing::Size(177, 35);
-			this->booksBtn->TabIndex = 2;
-			this->booksBtn->Text = L"Books";
-			this->booksBtn->UseVisualStyleBackColor = false;
-			// 
-			// supliersBtn
-			// 
-			this->supliersBtn->BackColor = System::Drawing::Color::LightCyan;
-			this->supliersBtn->FlatAppearance->BorderSize = 0;
-			this->supliersBtn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->supliersBtn->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->supliersBtn->Location = System::Drawing::Point(3, 132);
-			this->supliersBtn->Name = L"supliersBtn";
-			this->supliersBtn->Size = System::Drawing::Size(177, 35);
-			this->supliersBtn->TabIndex = 3;
-			this->supliersBtn->Text = L"Suppliers";
-			this->supliersBtn->UseVisualStyleBackColor = false;
+			this->signOutBtn->Location = System::Drawing::Point(3, 514);
+			this->signOutBtn->Name = L"signOutBtn";
+			this->signOutBtn->Size = System::Drawing::Size(177, 35);
+			this->signOutBtn->TabIndex = 5;
+			this->signOutBtn->Text = L"Sign out";
+			this->signOutBtn->UseVisualStyleBackColor = false;
 			// 
 			// usersBtn
 			// 
-			this->usersBtn->BackColor = System::Drawing::Color::LightCyan;
+			this->usersBtn->BackColor = System::Drawing::Color::Azure;
+			this->usersBtn->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->usersBtn->FlatAppearance->BorderSize = 0;
 			this->usersBtn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->usersBtn->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
@@ -150,21 +118,61 @@ namespace GeniusBooks {
 			this->usersBtn->Text = L"Users";
 			this->usersBtn->UseVisualStyleBackColor = false;
 			// 
-			// signOutBtn
+			// supliersBtn
 			// 
-			this->signOutBtn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->signOutBtn->BackColor = System::Drawing::Color::LightCyan;
-			this->signOutBtn->FlatAppearance->BorderSize = 0;
-			this->signOutBtn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->signOutBtn->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->supliersBtn->BackColor = System::Drawing::Color::Azure;
+			this->supliersBtn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->supliersBtn->FlatAppearance->BorderSize = 0;
+			this->supliersBtn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->supliersBtn->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->signOutBtn->Location = System::Drawing::Point(3, 514);
-			this->signOutBtn->Name = L"signOutBtn";
-			this->signOutBtn->Size = System::Drawing::Size(177, 35);
-			this->signOutBtn->TabIndex = 5;
-			this->signOutBtn->Text = L"Sign out";
-			this->signOutBtn->UseVisualStyleBackColor = false;
+			this->supliersBtn->Location = System::Drawing::Point(3, 132);
+			this->supliersBtn->Name = L"supliersBtn";
+			this->supliersBtn->Size = System::Drawing::Size(177, 35);
+			this->supliersBtn->TabIndex = 3;
+			this->supliersBtn->Text = L"Suppliers";
+			this->supliersBtn->UseVisualStyleBackColor = false;
+			// 
+			// booksBtn
+			// 
+			this->booksBtn->BackColor = System::Drawing::Color::Azure;
+			this->booksBtn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->booksBtn->FlatAppearance->BorderSize = 0;
+			this->booksBtn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->booksBtn->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->booksBtn->Location = System::Drawing::Point(3, 91);
+			this->booksBtn->Name = L"booksBtn";
+			this->booksBtn->Size = System::Drawing::Size(177, 35);
+			this->booksBtn->TabIndex = 2;
+			this->booksBtn->Text = L"Books";
+			this->booksBtn->UseVisualStyleBackColor = false;
+			// 
+			// dashboardBtn
+			// 
+			this->dashboardBtn->BackColor = System::Drawing::Color::Azure;
+			this->dashboardBtn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->dashboardBtn->FlatAppearance->BorderSize = 0;
+			this->dashboardBtn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->dashboardBtn->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->dashboardBtn->Location = System::Drawing::Point(3, 50);
+			this->dashboardBtn->Name = L"dashboardBtn";
+			this->dashboardBtn->Size = System::Drawing::Size(177, 35);
+			this->dashboardBtn->TabIndex = 1;
+			this->dashboardBtn->Text = L"Dashboard";
+			this->dashboardBtn->UseVisualStyleBackColor = false;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Mulish ExtraBold", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->Location = System::Drawing::Point(25, 9);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(136, 26);
+			this->label1->TabIndex = 0;
+			this->label1->Text = L"Genius Books";
 			// 
 			// mainPanel
 			// 
@@ -177,6 +185,23 @@ namespace GeniusBooks {
 			this->mainPanel->Name = L"mainPanel";
 			this->mainPanel->Size = System::Drawing::Size(798, 561);
 			this->mainPanel->TabIndex = 1;
+			// 
+			// profileBtn
+			// 
+			this->profileBtn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->profileBtn->BackColor = System::Drawing::Color::Azure;
+			this->profileBtn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->profileBtn->FlatAppearance->BorderSize = 0;
+			this->profileBtn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->profileBtn->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->profileBtn->Location = System::Drawing::Point(3, 473);
+			this->profileBtn->Name = L"profileBtn";
+			this->profileBtn->Size = System::Drawing::Size(177, 35);
+			this->profileBtn->TabIndex = 6;
+			this->profileBtn->Text = L"Profile";
+			this->profileBtn->UseVisualStyleBackColor = false;
 			// 
 			// AdminForm
 			// 

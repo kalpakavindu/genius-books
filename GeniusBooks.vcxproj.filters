@@ -33,6 +33,18 @@
     <ClCompile Include="Forms\AdminForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Panels\DashboardPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Panels\BooksPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Panels\SuppliersPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Panels\UsersPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Forms\AuthForm.h">
@@ -48,6 +60,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Forms\AdminForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Panels\DashboardPanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Panels\BooksPanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Panels\SuppliersPanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Panels\UsersPanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
