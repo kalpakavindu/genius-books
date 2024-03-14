@@ -67,9 +67,9 @@ namespace GeniusBooks {
 			this->addBtn = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->mainPanel = (gcnew System::Windows::Forms::Panel());
+			this->dataGrid = (gcnew System::Windows::Forms::DataGridView());
 			this->registeredBtn = (gcnew System::Windows::Forms::Button());
 			this->pendingBtn = (gcnew System::Windows::Forms::Button());
-			this->dataGrid = (gcnew System::Windows::Forms::DataGridView());
 			this->panel1->SuspendLayout();
 			this->mainPanel->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGrid))->BeginInit();
@@ -126,6 +126,20 @@ namespace GeniusBooks {
 			this->mainPanel->Size = System::Drawing::Size(774, 444);
 			this->mainPanel->TabIndex = 4;
 			// 
+			// dataGrid
+			// 
+			this->dataGrid->AllowUserToAddRows = false;
+			this->dataGrid->AllowUserToDeleteRows = false;
+			this->dataGrid->AllowUserToOrderColumns = true;
+			this->dataGrid->BackgroundColor = System::Drawing::Color::LightCyan;
+			this->dataGrid->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGrid->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->dataGrid->Location = System::Drawing::Point(0, 0);
+			this->dataGrid->Name = L"dataGrid";
+			this->dataGrid->ReadOnly = true;
+			this->dataGrid->Size = System::Drawing::Size(774, 444);
+			this->dataGrid->TabIndex = 0;
+			// 
 			// registeredBtn
 			// 
 			this->registeredBtn->BackColor = System::Drawing::Color::LightCyan;
@@ -156,20 +170,6 @@ namespace GeniusBooks {
 			this->pendingBtn->Text = L"Pending";
 			this->pendingBtn->UseVisualStyleBackColor = false;
 			// 
-			// dataGrid
-			// 
-			this->dataGrid->AllowUserToAddRows = false;
-			this->dataGrid->AllowUserToDeleteRows = false;
-			this->dataGrid->AllowUserToOrderColumns = true;
-			this->dataGrid->BackgroundColor = System::Drawing::Color::LightCyan;
-			this->dataGrid->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGrid->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->dataGrid->Location = System::Drawing::Point(0, 0);
-			this->dataGrid->Name = L"dataGrid";
-			this->dataGrid->ReadOnly = true;
-			this->dataGrid->Size = System::Drawing::Size(774, 444);
-			this->dataGrid->TabIndex = 0;
-			// 
 			// UsersPanel
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 18);
@@ -187,6 +187,8 @@ namespace GeniusBooks {
 			this->MinimizeBox = false;
 			this->MinimumSize = System::Drawing::Size(798, 561);
 			this->Name = L"UsersPanel";
+			this->ShowIcon = false;
+			this->ShowInTaskbar = false;
 			this->Text = L"UsersPanel";
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();

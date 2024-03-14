@@ -173,6 +173,8 @@ namespace GeniusBooks {
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"RegisterPanel";
+			this->ShowIcon = false;
+			this->ShowInTaskbar = false;
 			this->Text = L"RegisterPanel";
 			this->ResumeLayout(false);
 			this->PerformLayout();

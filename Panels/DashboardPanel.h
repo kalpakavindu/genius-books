@@ -98,19 +98,19 @@ namespace GeniusBooks {
 			this->label15 = (gcnew System::Windows::Forms::Label());
 			this->label16 = (gcnew System::Windows::Forms::Label());
 			this->panel5 = (gcnew System::Windows::Forms::Panel());
+			this->ordersGrid = (gcnew System::Windows::Forms::DataGridView());
 			this->label17 = (gcnew System::Windows::Forms::Label());
 			this->panel6 = (gcnew System::Windows::Forms::Panel());
-			this->label18 = (gcnew System::Windows::Forms::Label());
 			this->titlesGrid = (gcnew System::Windows::Forms::DataGridView());
-			this->ordersGrid = (gcnew System::Windows::Forms::DataGridView());
+			this->label18 = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
 			this->panel3->SuspendLayout();
 			this->panel4->SuspendLayout();
 			this->panel5->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ordersGrid))->BeginInit();
 			this->panel6->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->titlesGrid))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ordersGrid))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// panel1
@@ -336,6 +336,16 @@ namespace GeniusBooks {
 			this->panel5->Size = System::Drawing::Size(415, 280);
 			this->panel5->TabIndex = 7;
 			// 
+			// ordersGrid
+			// 
+			this->ordersGrid->BackgroundColor = System::Drawing::Color::LightCyan;
+			this->ordersGrid->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->ordersGrid->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->ordersGrid->Location = System::Drawing::Point(0, 0);
+			this->ordersGrid->Name = L"ordersGrid";
+			this->ordersGrid->Size = System::Drawing::Size(415, 280);
+			this->ordersGrid->TabIndex = 0;
+			// 
 			// label17
 			// 
 			this->label17->AutoSize = true;
@@ -357,18 +367,6 @@ namespace GeniusBooks {
 			this->panel6->Size = System::Drawing::Size(344, 280);
 			this->panel6->TabIndex = 8;
 			// 
-			// label18
-			// 
-			this->label18->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->label18->AutoSize = true;
-			this->label18->Font = (gcnew System::Drawing::Font(L"Mulish ExtraBold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label18->Location = System::Drawing::Point(438, 244);
-			this->label18->Name = L"label18";
-			this->label18->Size = System::Drawing::Size(109, 22);
-			this->label18->TabIndex = 9;
-			this->label18->Text = L"Recent Titles";
-			// 
 			// titlesGrid
 			// 
 			this->titlesGrid->AllowUserToAddRows = false;
@@ -383,15 +381,17 @@ namespace GeniusBooks {
 			this->titlesGrid->Size = System::Drawing::Size(344, 280);
 			this->titlesGrid->TabIndex = 0;
 			// 
-			// ordersGrid
+			// label18
 			// 
-			this->ordersGrid->BackgroundColor = System::Drawing::Color::LightCyan;
-			this->ordersGrid->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->ordersGrid->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->ordersGrid->Location = System::Drawing::Point(0, 0);
-			this->ordersGrid->Name = L"ordersGrid";
-			this->ordersGrid->Size = System::Drawing::Size(415, 280);
-			this->ordersGrid->TabIndex = 0;
+			this->label18->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->label18->AutoSize = true;
+			this->label18->Font = (gcnew System::Drawing::Font(L"Mulish ExtraBold", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label18->Location = System::Drawing::Point(438, 244);
+			this->label18->Name = L"label18";
+			this->label18->Size = System::Drawing::Size(109, 22);
+			this->label18->TabIndex = 9;
+			this->label18->Text = L"Recent Titles";
 			// 
 			// DashboardPanel
 			// 
@@ -414,6 +414,8 @@ namespace GeniusBooks {
 			this->MinimizeBox = false;
 			this->MinimumSize = System::Drawing::Size(798, 561);
 			this->Name = L"DashboardPanel";
+			this->ShowIcon = false;
+			this->ShowInTaskbar = false;
 			this->Text = L"DashboardPanel";
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
@@ -424,9 +426,9 @@ namespace GeniusBooks {
 			this->panel4->ResumeLayout(false);
 			this->panel4->PerformLayout();
 			this->panel5->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ordersGrid))->EndInit();
 			this->panel6->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->titlesGrid))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ordersGrid))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

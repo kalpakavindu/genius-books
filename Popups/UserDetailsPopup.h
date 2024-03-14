@@ -183,15 +183,15 @@ namespace GeniusBooks {
 			// 
 			// delBtn
 			// 
-			this->delBtn->BackColor = System::Drawing::Color::Lavender;
+			this->delBtn->BackColor = System::Drawing::Color::Salmon;
 			this->delBtn->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->delBtn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->delBtn->Font = (gcnew System::Drawing::Font(L"Mulish Medium", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->delBtn->ForeColor = System::Drawing::Color::Black;
-			this->delBtn->Location = System::Drawing::Point(143, 278);
+			this->delBtn->ForeColor = System::Drawing::Color::Azure;
+			this->delBtn->Location = System::Drawing::Point(192, 278);
 			this->delBtn->Name = L"delBtn";
-			this->delBtn->Size = System::Drawing::Size(166, 39);
+			this->delBtn->Size = System::Drawing::Size(122, 39);
 			this->delBtn->TabIndex = 10;
 			this->delBtn->Text = L"Delete Profile";
 			this->delBtn->UseVisualStyleBackColor = false;

@@ -188,6 +188,8 @@ namespace GeniusBooks {
 			this->MinimizeBox = false;
 			this->MinimumSize = System::Drawing::Size(798, 561);
 			this->Name = L"BooksPanel";
+			this->ShowIcon = false;
+			this->ShowInTaskbar = false;
 			this->Text = L"BooksPanel";
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();

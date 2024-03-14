@@ -378,12 +378,13 @@ namespace GeniusBooks {
 			this->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->MaximizeBox = false;
 			this->MaximumSize = System::Drawing::Size(718, 504);
 			this->MinimizeBox = false;
 			this->MinimumSize = System::Drawing::Size(718, 504);
 			this->Name = L"BookDetailsPopup";
+			this->ShowInTaskbar = false;
 			this->Text = L"BookDetailsPopup";
 			this->ResumeLayout(false);
 			this->PerformLayout();

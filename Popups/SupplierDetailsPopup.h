@@ -48,10 +48,13 @@ namespace GeniusBooks {
 	private: System::Windows::Forms::Button^ currentOrdersBtn;
 	private: System::Windows::Forms::DataGridView^ ordersGrid;
 	private: System::Windows::Forms::Button^ completedOrdersBtn;
-	private: System::Windows::Forms::Panel^ panel2;
-	private: System::Windows::Forms::Panel^ panel3;
-	private: System::Windows::Forms::Panel^ panel4;
-	private: System::Windows::Forms::Panel^ panel5;
+
+
+
+
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ button3;
 
 
 
@@ -73,13 +76,12 @@ namespace GeniusBooks {
 			this->emailLabel = (gcnew System::Windows::Forms::Label());
 			this->contactLabel = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->ordersGrid = (gcnew System::Windows::Forms::DataGridView());
 			this->currentOrdersBtn = (gcnew System::Windows::Forms::Button());
 			this->completedOrdersBtn = (gcnew System::Windows::Forms::Button());
-			this->ordersGrid = (gcnew System::Windows::Forms::DataGridView());
-			this->panel2 = (gcnew System::Windows::Forms::Panel());
-			this->panel3 = (gcnew System::Windows::Forms::Panel());
-			this->panel4 = (gcnew System::Windows::Forms::Panel());
-			this->panel5 = (gcnew System::Windows::Forms::Panel());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ordersGrid))->BeginInit();
 			this->SuspendLayout();
@@ -133,6 +135,20 @@ namespace GeniusBooks {
 			this->panel1->Size = System::Drawing::Size(628, 234);
 			this->panel1->TabIndex = 4;
 			// 
+			// ordersGrid
+			// 
+			this->ordersGrid->AllowUserToAddRows = false;
+			this->ordersGrid->AllowUserToDeleteRows = false;
+			this->ordersGrid->AllowUserToOrderColumns = true;
+			this->ordersGrid->BackgroundColor = System::Drawing::Color::LightCyan;
+			this->ordersGrid->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->ordersGrid->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->ordersGrid->Location = System::Drawing::Point(0, 0);
+			this->ordersGrid->Name = L"ordersGrid";
+			this->ordersGrid->ReadOnly = true;
+			this->ordersGrid->Size = System::Drawing::Size(628, 234);
+			this->ordersGrid->TabIndex = 0;
+			// 
 			// currentOrdersBtn
 			// 
 			this->currentOrdersBtn->BackColor = System::Drawing::Color::LightCyan;
@@ -163,51 +179,47 @@ namespace GeniusBooks {
 			this->completedOrdersBtn->Text = L"Completed orders";
 			this->completedOrdersBtn->UseVisualStyleBackColor = false;
 			// 
-			// ordersGrid
+			// button1
 			// 
-			this->ordersGrid->AllowUserToAddRows = false;
-			this->ordersGrid->AllowUserToDeleteRows = false;
-			this->ordersGrid->AllowUserToOrderColumns = true;
-			this->ordersGrid->BackgroundColor = System::Drawing::Color::LightCyan;
-			this->ordersGrid->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->ordersGrid->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->ordersGrid->Location = System::Drawing::Point(0, 0);
-			this->ordersGrid->Name = L"ordersGrid";
-			this->ordersGrid->ReadOnly = true;
-			this->ordersGrid->Size = System::Drawing::Size(628, 234);
-			this->ordersGrid->TabIndex = 0;
+			this->button1->BackColor = System::Drawing::Color::RoyalBlue;
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button1->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button1->ForeColor = System::Drawing::Color::Azure;
+			this->button1->Location = System::Drawing::Point(545, 143);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(101, 34);
+			this->button1->TabIndex = 11;
+			this->button1->Text = L"Place Order";
+			this->button1->UseVisualStyleBackColor = false;
 			// 
-			// panel2
+			// button2
 			// 
-			this->panel2->BackColor = System::Drawing::Color::PaleTurquoise;
-			this->panel2->Location = System::Drawing::Point(477, 12);
-			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(88, 100);
-			this->panel2->TabIndex = 7;
+			this->button2->BackColor = System::Drawing::Color::Salmon;
+			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button2->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button2->ForeColor = System::Drawing::Color::Azure;
+			this->button2->Location = System::Drawing::Point(535, 54);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(111, 34);
+			this->button2->TabIndex = 12;
+			this->button2->Text = L"Delete Supplier";
+			this->button2->UseVisualStyleBackColor = false;
 			// 
-			// panel3
+			// button3
 			// 
-			this->panel3->BackColor = System::Drawing::Color::LightCyan;
-			this->panel3->Location = System::Drawing::Point(581, 75);
-			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(65, 66);
-			this->panel3->TabIndex = 8;
-			// 
-			// panel4
-			// 
-			this->panel4->BackColor = System::Drawing::Color::AliceBlue;
-			this->panel4->Location = System::Drawing::Point(505, 121);
-			this->panel4->Name = L"panel4";
-			this->panel4->Size = System::Drawing::Size(60, 20);
-			this->panel4->TabIndex = 9;
-			// 
-			// panel5
-			// 
-			this->panel5->BackColor = System::Drawing::Color::AliceBlue;
-			this->panel5->Location = System::Drawing::Point(581, 32);
-			this->panel5->Name = L"panel5";
-			this->panel5->Size = System::Drawing::Size(38, 34);
-			this->panel5->TabIndex = 10;
+			this->button3->BackColor = System::Drawing::Color::RoyalBlue;
+			this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button3->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button3->ForeColor = System::Drawing::Color::Azure;
+			this->button3->Location = System::Drawing::Point(535, 13);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(111, 34);
+			this->button3->TabIndex = 13;
+			this->button3->Text = L"Edit Supplier";
+			this->button3->UseVisualStyleBackColor = false;
 			// 
 			// SupplierDetailsPopup
 			// 
@@ -215,10 +227,9 @@ namespace GeniusBooks {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Azure;
 			this->ClientSize = System::Drawing::Size(658, 428);
-			this->Controls->Add(this->panel5);
-			this->Controls->Add(this->panel4);
-			this->Controls->Add(this->panel3);
-			this->Controls->Add(this->panel2);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->completedOrdersBtn);
 			this->Controls->Add(this->currentOrdersBtn);
 			this->Controls->Add(this->panel1);
@@ -229,12 +240,13 @@ namespace GeniusBooks {
 			this->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->MaximizeBox = false;
 			this->MaximumSize = System::Drawing::Size(674, 467);
 			this->MinimizeBox = false;
 			this->MinimumSize = System::Drawing::Size(674, 467);
 			this->Name = L"SupplierDetailsPopup";
+			this->ShowInTaskbar = false;
 			this->Text = L"SupplierDetailsPopup";
 			this->panel1->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ordersGrid))->EndInit();

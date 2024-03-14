@@ -146,6 +146,8 @@ namespace GeniusBooks {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
 			this->Name = L"LoginPanel";
+			this->ShowIcon = false;
+			this->ShowInTaskbar = false;
 			this->Text = L"LoginPanel";
 			this->ResumeLayout(false);
 			this->PerformLayout();
