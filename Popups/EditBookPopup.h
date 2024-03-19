@@ -1,7 +1,8 @@
 #pragma once
+#include "../Database.h"
+#include "../ComboItem.h"
 
 namespace GeniusBooks {
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -14,13 +15,55 @@ namespace GeniusBooks {
 	/// </summary>
 	public ref class EditBookPopup : public System::Windows::Forms::Form
 	{
+	private: Database^ conn;
+	private: int editId;
+
+	private:void loadComboData(){
+		try {
+			String^ query = "SELECT id,name FROM SuppliersTable";
+			DataTable^ suppliers = conn->GetData(query);
+			for each (DataRow ^ r in suppliers->Rows) {
+				supplierInput->Items->Add(gcnew ComboItem(safe_cast<String^>(r["name"]), safe_cast<int>(r["id"])));
+			}
+		}
+		catch (Exception^ e) {
+			if (MessageBox::Show(e->Message, "Unexpected Error", MessageBoxButtons::OK) == System::Windows::Forms::DialogResult::OK) {
+				Application::Exit();
+			}
+		}
+	}
+
 	public:
 		EditBookPopup(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			conn = gcnew Database();
+			loadComboData();
+		}
+
+		void setData(int id) {
+			try {
+				editId = id;
+				String^ query = "SELECT * FROM BooksTable WHERE id=" + editId;
+				DataRow^ bookData = conn->GetData(query)->Rows[0];
+
+				titleInput->Text = safe_cast<String^>(bookData["title"]);
+				isbnInput->Text = safe_cast<String^>(bookData["isbn"]);
+				authorInput->Text = safe_cast<String^>(bookData["author"]);
+				publisherInput->Text = safe_cast<String^>(bookData["publisher"]);
+				priceInput->Text = safe_cast<String^>(bookData["unit_price"]);
+				stockInput->Text = bookData["stock_qty"]->ToString();
+
+				query = "SELECT id,name FROM SuppliersTable WHERE id=" + safe_cast<int>(bookData["supplier"]);
+				DataRow^ supplier = conn->GetData(query)->Rows[0];
+				supplierInput->SelectedItem = gcnew ComboItem(safe_cast<String^>(supplier["name"]), safe_cast<int>(supplier["id"]));
+				supplierInput->Text = safe_cast<String^>(supplier["name"]);
+			}
+			catch (Exception^ e) {
+				if (MessageBox::Show(e->Message, "Unexpected Error", MessageBoxButtons::OK) == System::Windows::Forms::DialogResult::OK) {
+					Application::Exit();
+				}
+			}
 		}
 
 	protected:
@@ -35,46 +78,29 @@ namespace GeniusBooks {
 			}
 		}
 
-	protected:
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::TextBox^ titleInput;
-
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::TextBox^ isbnInput;
-
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::TextBox^ authorInput;
-
-	private: System::Windows::Forms::Label^ label5;
-	private: System::Windows::Forms::ComboBox^ genreInput;
-
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::ComboBox^ supplierInput;
-
 	private: System::Windows::Forms::Label^ label7;
 	private: System::Windows::Forms::TextBox^ publisherInput;
-
 	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::TextBox^ priceInput;
-
-
 	private: System::Windows::Forms::Label^ label8;
-	private: System::Windows::Forms::Label^ label10;
 	private: System::Windows::Forms::TextBox^ stockInput;
-
 	private: System::Windows::Forms::Label^ label9;
-	private: System::Windows::Forms::TextBox^ soldInput;
-	private: System::Windows::Forms::Button^ saveBtn;
+	public: System::Windows::Forms::Button^ saveBtn;
 	private: System::Windows::Forms::Button^ cancelBtn;
-
-
-
 	private: System::Windows::Forms::Panel^ panel2;
 	private: System::Windows::Forms::Panel^ panel3;
 	private: System::Windows::Forms::Panel^ panel4;
 	private: System::Windows::Forms::Panel^ panel5;
 	private: System::Windows::Forms::Label^ label11;
-
+	public: System::Windows::Forms::Button^ addBtn;
 
 	private:
 		/// <summary>
@@ -82,7 +108,7 @@ namespace GeniusBooks {
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
-#pragma region Windows Form Designer generated code
+	#pragma region Windows Form Designer generated code
 		/// <summary>
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
@@ -95,16 +121,12 @@ namespace GeniusBooks {
 			this->isbnInput = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->authorInput = (gcnew System::Windows::Forms::TextBox());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->genreInput = (gcnew System::Windows::Forms::ComboBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->supplierInput = (gcnew System::Windows::Forms::ComboBox());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->publisherInput = (gcnew System::Windows::Forms::TextBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->label11 = (gcnew System::Windows::Forms::Label());
-			this->soldInput = (gcnew System::Windows::Forms::TextBox());
-			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->stockInput = (gcnew System::Windows::Forms::TextBox());
 			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->priceInput = (gcnew System::Windows::Forms::TextBox());
@@ -115,6 +137,7 @@ namespace GeniusBooks {
 			this->panel3 = (gcnew System::Windows::Forms::Panel());
 			this->panel4 = (gcnew System::Windows::Forms::Panel());
 			this->panel5 = (gcnew System::Windows::Forms::Panel());
+			this->addBtn = (gcnew System::Windows::Forms::Button());
 			this->panel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -169,23 +192,6 @@ namespace GeniusBooks {
 			this->authorInput->Size = System::Drawing::Size(351, 24);
 			this->authorInput->TabIndex = 6;
 			// 
-			// label5
-			// 
-			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(408, 73);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(45, 18);
-			this->label5->TabIndex = 7;
-			this->label5->Text = L"Genre";
-			// 
-			// genreInput
-			// 
-			this->genreInput->FormattingEnabled = true;
-			this->genreInput->Location = System::Drawing::Point(411, 94);
-			this->genreInput->Name = L"genreInput";
-			this->genreInput->Size = System::Drawing::Size(351, 26);
-			this->genreInput->TabIndex = 9;
-			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
@@ -224,8 +230,6 @@ namespace GeniusBooks {
 			// 
 			this->panel1->BackColor = System::Drawing::Color::LightCyan;
 			this->panel1->Controls->Add(this->label11);
-			this->panel1->Controls->Add(this->soldInput);
-			this->panel1->Controls->Add(this->label10);
 			this->panel1->Controls->Add(this->stockInput);
 			this->panel1->Controls->Add(this->label9);
 			this->panel1->Controls->Add(this->priceInput);
@@ -243,23 +247,6 @@ namespace GeniusBooks {
 			this->label11->Size = System::Drawing::Size(32, 18);
 			this->label11->TabIndex = 17;
 			this->label11->Text = L"LKR";
-			// 
-			// soldInput
-			// 
-			this->soldInput->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->soldInput->Location = System::Drawing::Point(11, 162);
-			this->soldInput->Name = L"soldInput";
-			this->soldInput->Size = System::Drawing::Size(223, 24);
-			this->soldInput->TabIndex = 16;
-			// 
-			// label10
-			// 
-			this->label10->AutoSize = true;
-			this->label10->Location = System::Drawing::Point(8, 141);
-			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(60, 18);
-			this->label10->TabIndex = 15;
-			this->label10->Text = L"Sold Out";
 			// 
 			// stockInput
 			// 
@@ -309,6 +296,7 @@ namespace GeniusBooks {
 			this->saveBtn->TabIndex = 15;
 			this->saveBtn->Text = L"Save Details";
 			this->saveBtn->UseVisualStyleBackColor = false;
+			this->saveBtn->Click += gcnew System::EventHandler(this, &EditBookPopup::saveBtn_Click);
 			// 
 			// cancelBtn
 			// 
@@ -323,6 +311,7 @@ namespace GeniusBooks {
 			this->cancelBtn->TabIndex = 16;
 			this->cancelBtn->Text = L"Cancel";
 			this->cancelBtn->UseVisualStyleBackColor = false;
+			this->cancelBtn->Click += gcnew System::EventHandler(this, &EditBookPopup::cancelBtn_Click);
 			// 
 			// panel2
 			// 
@@ -356,12 +345,29 @@ namespace GeniusBooks {
 			this->panel5->Size = System::Drawing::Size(94, 27);
 			this->panel5->TabIndex = 20;
 			// 
+			// addBtn
+			// 
+			this->addBtn->BackColor = System::Drawing::Color::RoyalBlue;
+			this->addBtn->FlatAppearance->BorderColor = System::Drawing::Color::RoyalBlue;
+			this->addBtn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->addBtn->Font = (gcnew System::Drawing::Font(L"Mulish", 9.749999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->addBtn->ForeColor = System::Drawing::Color::Azure;
+			this->addBtn->Location = System::Drawing::Point(626, 393);
+			this->addBtn->Name = L"addBtn";
+			this->addBtn->Size = System::Drawing::Size(136, 33);
+			this->addBtn->TabIndex = 21;
+			this->addBtn->Text = L"Add Book";
+			this->addBtn->UseVisualStyleBackColor = false;
+			this->addBtn->Click += gcnew System::EventHandler(this, &EditBookPopup::addBtn_Click);
+			// 
 			// EditBookPopup
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 18);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Azure;
 			this->ClientSize = System::Drawing::Size(776, 441);
+			this->Controls->Add(this->addBtn);
 			this->Controls->Add(this->panel5);
 			this->Controls->Add(this->panel4);
 			this->Controls->Add(this->panel3);
@@ -373,8 +379,6 @@ namespace GeniusBooks {
 			this->Controls->Add(this->label7);
 			this->Controls->Add(this->supplierInput);
 			this->Controls->Add(this->label6);
-			this->Controls->Add(this->genreInput);
-			this->Controls->Add(this->label5);
 			this->Controls->Add(this->authorInput);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->isbnInput);
@@ -398,6 +402,76 @@ namespace GeniusBooks {
 			this->PerformLayout();
 
 		}
-#pragma endregion
-	};
+	#pragma endregion
+
+	private: System::Void cancelBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
+
+	private: System::Void saveBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		try {
+			String^ title = titleInput->Text;
+			String^ isbn = isbnInput->Text;
+			String^ author = authorInput->Text;
+			int supplier = safe_cast<ComboItem^>(supplierInput->SelectedItem)->GetValue();
+			String^ publisher = publisherInput->Text;
+			String^ unitPrice = priceInput->Text;
+			String^ inStock = stockInput->Text;
+
+			if (title == "" || isbn == "" || author == "" || publisher == "" || unitPrice == "" || inStock == "" || supplierInput->Text == "") {
+				MessageBox::Show("All fields must be provided.", "Error", MessageBoxButtons::OK);
+			}
+			else {
+				if (isbn->Length > 13) {
+					MessageBox::Show("ISBN must be a valid input.", "Error", MessageBoxButtons::OK);
+				}
+				else {
+					String^ query = "UPDATE BooksTable SET title='" + title + "', author='" + author + "', publisher='" + publisher + "', unit_price=" + unitPrice + ", stock_qty=" + inStock + ", supplier=" + supplier;
+					conn->SetData(query);
+					this->Close();
+				}
+			}
+		}
+		catch (Exception^ e) {
+			if (MessageBox::Show(e->Message, "Unexpected Error", MessageBoxButtons::OK) == System::Windows::Forms::DialogResult::OK) {
+				Application::Exit();
+			}
+		}
+
+	}
+	
+	private: System::Void addBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		try {
+			String^ title = titleInput->Text;
+			String^ isbn = isbnInput->Text;
+			String^ author = authorInput->Text;
+			int supplier = safe_cast<ComboItem^>(supplierInput->SelectedItem)->GetValue();
+			String^ publisher = publisherInput->Text;
+			String^ unitPrice = priceInput->Text;
+			String^ inStock = stockInput->Text;
+
+			if (title == "" || isbn == "" || author == "" || publisher == "" || unitPrice == "" || inStock == "" || supplierInput->Text == "") {
+				MessageBox::Show("All fields must be provided.", "Error", MessageBoxButtons::OK);
+			}
+			else {
+				if (isbn->Length > 13) {
+					MessageBox::Show("ISBN must be a valid input.", "Error", MessageBoxButtons::OK);
+				}
+				else {
+					DateTime^ currentDate = DateTime::Now;
+					String^ createdAt = currentDate->ToString("yyyy-MM-dd");
+
+					String^ query = "INSERT INTO BooksTable VALUES(" + isbn + ",'" + title + "','" + author + "','" + publisher + "','" + unitPrice + "'," + inStock + "," + supplier + ",'" + createdAt + "')";
+					conn->SetData(query);
+					this->Close();
+				}
+			}
+		}
+		catch (Exception^ e) {
+			if (MessageBox::Show(e->Message, "Unexpected Error", MessageBoxButtons::OK) == System::Windows::Forms::DialogResult::OK) {
+				Application::Exit();
+			}
+		}
+	}
+};
 }

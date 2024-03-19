@@ -1,7 +1,9 @@
 #pragma once
+#include "../Database.h"
+#include "../Popups/EditOrderPopup.h"
+#include "../Popups/BookDetailsPopup.h"
 
 namespace GeniusBooks {
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -14,13 +16,32 @@ namespace GeniusBooks {
 	/// </summary>
 	public ref class DashboardPanel : public System::Windows::Forms::Form
 	{
+	private:
+		Database^ conn;
+
+		void loadData() {
+			try {
+				String^ query = "SELECT * FROM OrdersTable WHERE status=0 ORDER BY created_at DESC";
+				DataTable^ latestOrders = conn->GetData(query);
+				ordersGrid->DataSource = latestOrders;
+
+				query = "SELECT * FROM BooksTable ORDER BY created_at DESC";
+				DataTable^ latestBooks = conn->GetData(query);
+				titlesGrid->DataSource = latestBooks;
+			}
+			catch (Exception^ e) {
+				if (MessageBox::Show(e->Message, "Unexpected Error", MessageBoxButtons::OK) == System::Windows::Forms::DialogResult::OK) {
+					Application::Exit();
+				}
+			}
+		}
+
 	public:
 		DashboardPanel(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			conn = gcnew Database();
+			loadData();
 		}
 
 	protected:
@@ -338,13 +359,18 @@ namespace GeniusBooks {
 			// 
 			// ordersGrid
 			// 
+			this->ordersGrid->AllowUserToAddRows = false;
+			this->ordersGrid->AllowUserToDeleteRows = false;
+			this->ordersGrid->AllowUserToOrderColumns = true;
 			this->ordersGrid->BackgroundColor = System::Drawing::Color::LightCyan;
 			this->ordersGrid->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->ordersGrid->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->ordersGrid->Location = System::Drawing::Point(0, 0);
 			this->ordersGrid->Name = L"ordersGrid";
+			this->ordersGrid->ReadOnly = true;
 			this->ordersGrid->Size = System::Drawing::Size(415, 280);
 			this->ordersGrid->TabIndex = 0;
+			this->ordersGrid->CellDoubleClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &DashboardPanel::ordersGrid_CellDoubleClick);
 			// 
 			// label17
 			// 
@@ -380,6 +406,7 @@ namespace GeniusBooks {
 			this->titlesGrid->ReadOnly = true;
 			this->titlesGrid->Size = System::Drawing::Size(344, 280);
 			this->titlesGrid->TabIndex = 0;
+			this->titlesGrid->CellDoubleClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &DashboardPanel::titlesGrid_CellDoubleClick);
 			// 
 			// label18
 			// 
@@ -397,7 +424,8 @@ namespace GeniusBooks {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 18);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::Azure;
+			this->AutoSize = true;
+			this->BackColor = System::Drawing::Color::LightCyan;
 			this->ClientSize = System::Drawing::Size(798, 561);
 			this->Controls->Add(this->label18);
 			this->Controls->Add(this->panel6);
@@ -411,7 +439,6 @@ namespace GeniusBooks {
 				static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(4);
-			this->MinimizeBox = false;
 			this->MinimumSize = System::Drawing::Size(798, 561);
 			this->Name = L"DashboardPanel";
 			this->ShowIcon = false;
@@ -434,5 +461,27 @@ namespace GeniusBooks {
 
 		}
 #pragma endregion
-	};
+
+	private: System::Void ordersGrid_CellDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		int orderId = safe_cast<int>(ordersGrid->Rows[e->RowIndex]->Cells[0]->Value);
+		EditOrderPopup^ editOrderPopup = gcnew EditOrderPopup();
+		editOrderPopup->setData(orderId);
+		editOrderPopup->addBtn->Hide();
+		editOrderPopup->saveBtn->Show();
+		editOrderPopup->delBtn->Show();
+		editOrderPopup->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &DashboardPanel::formClosed);
+		editOrderPopup->ShowDialog();
+	}
+
+	private: System::Void formClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
+		loadData();
+	}
+	
+	private: System::Void titlesGrid_CellDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		int bookId = safe_cast<int>(titlesGrid->Rows[e->RowIndex]->Cells[0]->Value);
+		BookDetailsPopup^ bookDataPopup = gcnew BookDetailsPopup(bookId);
+		bookDataPopup->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &DashboardPanel::formClosed);
+		bookDataPopup->ShowDialog();
+	}
+};
 }

@@ -130,12 +130,15 @@
     <ClCompile Include="Panels\UsersPanel.cpp" />
     <ClCompile Include="Popups\BookDetailsPopup.cpp" />
     <ClCompile Include="Popups\EditBookPopup.cpp" />
+    <ClCompile Include="Popups\EditOrderPopup.cpp" />
     <ClCompile Include="Popups\EditSupplierPopup.cpp" />
+    <ClCompile Include="Popups\EditUserPopup.cpp" />
     <ClCompile Include="Popups\SupplierDetailsPopup.cpp" />
     <ClCompile Include="Popups\UserDetailsPopup.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ComboItem.h" />
     <ClInclude Include="Database.h" />
     <ClInclude Include="Forms\AdminForm.h">
       <FileType>CppForm</FileType>
@@ -167,7 +170,13 @@
     <ClInclude Include="Popups\EditBookPopup.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Popups\EditOrderPopup.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Popups\EditSupplierPopup.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Popups\EditUserPopup.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Popups\SupplierDetailsPopup.h">
@@ -208,8 +217,14 @@
     <EmbeddedResource Include="Popups\EditBookPopup.resx">
       <DependentUpon>Popups\EditBookPopup.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Popups\EditOrderPopup.resx">
+      <DependentUpon>Popups\EditOrderPopup.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Popups\EditSupplierPopup.resx">
       <DependentUpon>Popups\EditSupplierPopup.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Popups\EditUserPopup.resx">
+      <DependentUpon>Popups\EditUserPopup.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Popups\SupplierDetailsPopup.resx">
       <DependentUpon>Popups\SupplierDetailsPopup.h</DependentUpon>

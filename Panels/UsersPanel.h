@@ -1,4 +1,7 @@
 #pragma once
+#include "../Database.h"
+#include "../Popups/EditUserPopup.h"
+#include "../Popups/UserDetailsPopup.h"
 
 namespace GeniusBooks {
 
@@ -14,6 +17,51 @@ namespace GeniusBooks {
 	/// </summary>
 	public ref class UsersPanel : public System::Windows::Forms::Form
 	{
+	private:
+		EditUserPopup^ editUserPopup;
+		UserDetailsPopup^ viewUserPopup;
+		Database^ conn;
+		int currentTab = 0;
+
+		void loadData() {
+			try {
+				String^ query;
+				if (currentTab == 0) {
+					this->pendingBtn->BackColor = System::Drawing::Color::Azure;
+					this->registeredBtn->BackColor = System::Drawing::Color::PaleTurquoise;
+					query = "SELECT * FROM UsersTable WHERE password IS NOT NULL";
+				}
+				else {
+					this->pendingBtn->BackColor = System::Drawing::Color::PaleTurquoise;
+					this->registeredBtn->BackColor = System::Drawing::Color::Azure;
+					query = "SELECT * FROM UsersTable WHERE password IS NULL";
+				}
+				DataTable^ userDetials = conn->GetData(query);
+				dataGrid->DataSource = userDetials;
+			}
+			catch (Exception^ e) {
+				if (MessageBox::Show(e->Message, "Unexpected Error", MessageBoxButtons::OK) == System::Windows::Forms::DialogResult::OK) {
+					Application::Exit();
+				}
+			}
+		}
+
+		void openAddUserPopup() {
+			editUserPopup->Text = "Add New User";
+			editUserPopup->saveBtn->Hide();
+			editUserPopup->addBtn->Show();
+			editUserPopup->passwordInput->Hide();
+			editUserPopup->label7->Hide();
+			editUserPopup->ShowDialog();
+		}
+
+		void openEditUserPopup() {
+			editUserPopup->Text = "Edit User Details";
+			editUserPopup->saveBtn->Show();
+			editUserPopup->addBtn->Hide();
+			editUserPopup->ShowDialog();
+		}
+
 	public:
 		UsersPanel(void)
 		{
@@ -21,6 +69,11 @@ namespace GeniusBooks {
 			//
 			//TODO: Add the constructor code here
 			//
+
+			conn = gcnew Database();
+			editUserPopup = gcnew EditUserPopup();
+			editUserPopup->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &UsersPanel::formClosed);
+			loadData();
 		}
 
 	protected:
@@ -44,11 +97,6 @@ namespace GeniusBooks {
 	private: System::Windows::Forms::Button^ registeredBtn;
 	private: System::Windows::Forms::Button^ pendingBtn;
 	private: System::Windows::Forms::DataGridView^ dataGrid;
-
-
-
-
-
 
 	private:
 		/// <summary>
@@ -102,6 +150,7 @@ namespace GeniusBooks {
 			this->addBtn->TabIndex = 2;
 			this->addBtn->Text = L"Add User";
 			this->addBtn->UseVisualStyleBackColor = false;
+			this->addBtn->Click += gcnew System::EventHandler(this, &UsersPanel::addBtn_Click);
 			// 
 			// label1
 			// 
@@ -139,10 +188,11 @@ namespace GeniusBooks {
 			this->dataGrid->ReadOnly = true;
 			this->dataGrid->Size = System::Drawing::Size(774, 444);
 			this->dataGrid->TabIndex = 0;
+			this->dataGrid->CellMouseDoubleClick += gcnew System::Windows::Forms::DataGridViewCellMouseEventHandler(this, &UsersPanel::dataGrid_CellMouseDoubleClick);
 			// 
 			// registeredBtn
 			// 
-			this->registeredBtn->BackColor = System::Drawing::Color::LightCyan;
+			this->registeredBtn->BackColor = System::Drawing::Color::PaleTurquoise;
 			this->registeredBtn->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->registeredBtn->FlatAppearance->BorderSize = 0;
 			this->registeredBtn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
@@ -154,10 +204,11 @@ namespace GeniusBooks {
 			this->registeredBtn->TabIndex = 5;
 			this->registeredBtn->Text = L"Registered";
 			this->registeredBtn->UseVisualStyleBackColor = false;
+			this->registeredBtn->Click += gcnew System::EventHandler(this, &UsersPanel::registeredBtn_Click);
 			// 
 			// pendingBtn
 			// 
-			this->pendingBtn->BackColor = System::Drawing::Color::AliceBlue;
+			this->pendingBtn->BackColor = System::Drawing::Color::Azure;
 			this->pendingBtn->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->pendingBtn->FlatAppearance->BorderSize = 0;
 			this->pendingBtn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
@@ -169,12 +220,13 @@ namespace GeniusBooks {
 			this->pendingBtn->TabIndex = 6;
 			this->pendingBtn->Text = L"Pending";
 			this->pendingBtn->UseVisualStyleBackColor = false;
+			this->pendingBtn->Click += gcnew System::EventHandler(this, &UsersPanel::pendingBtn_Click);
 			// 
 			// UsersPanel
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 18);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::Azure;
+			this->BackColor = System::Drawing::Color::LightCyan;
 			this->ClientSize = System::Drawing::Size(798, 561);
 			this->Controls->Add(this->pendingBtn);
 			this->Controls->Add(this->registeredBtn);
@@ -198,5 +250,29 @@ namespace GeniusBooks {
 
 		}
 #pragma endregion
-	};
+
+	private: System::Void pendingBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		currentTab = 1;
+		loadData();
+	}
+
+	private: System::Void registeredBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		currentTab = 0;
+		loadData();
+	}
+	private: System::Void addBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		openAddUserPopup();
+	}
+
+	private: System::Void formClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
+		loadData();
+	}
+
+	private: System::Void dataGrid_CellMouseDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
+		int userId = safe_cast<int>(dataGrid->Rows[e->RowIndex]->Cells[0]->Value);
+		viewUserPopup = gcnew UserDetailsPopup(userId);
+		viewUserPopup->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &UsersPanel::formClosed);
+		viewUserPopup->ShowDialog();
+	}
+};
 }

@@ -1,4 +1,6 @@
 #pragma once
+#include "../Database.h";
+#include "./EditUserPopup.h";
 
 namespace GeniusBooks {
 
@@ -14,13 +16,37 @@ namespace GeniusBooks {
 	/// </summary>
 	public ref class UserDetailsPopup : public System::Windows::Forms::Form
 	{
+	private: Database^ conn;
+	private: System::Windows::Forms::Label^ userLabel;
+	private: int userId;
+	private:EditUserPopup^ editUserPopup;
+
 	public:
-		UserDetailsPopup(void)
+		UserDetailsPopup(int id)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			conn = gcnew Database();
+			editUserPopup = gcnew EditUserPopup();
+			userId = id;
+			loadData();
+		}
+
+		void loadData() {
+			try {
+				String^ query = "SELECT * FROM UsersTable WHERE id=" + userId;
+				DataRow^ data = conn->GetData(query)->Rows[0];
+
+				this->nameLabel->Text = safe_cast<String^>(data["first_name"]) + " " + safe_cast<String^>(data["last_name"]);
+				this->emailLabel->Text = safe_cast<String^>(data["email"]);
+				this->contactLabel->Text = safe_cast<String^>(data["contact"]);
+				this->dobLabel->Text = data["dob"]->ToString();
+				this->userLabel->Text = safe_cast<String^>(data["role"]);
+			}
+			catch (Exception^ e) {
+				if (MessageBox::Show(e->Message, "Unexpected Error", MessageBoxButtons::OK) == System::Windows::Forms::DialogResult::OK) {
+					Application::Exit();
+				}
+			}
 		}
 
 	protected:
@@ -47,12 +73,7 @@ namespace GeniusBooks {
 	private: System::Windows::Forms::Label^ genderLabel;
 	private: System::Windows::Forms::Label^ dobLabel;
 	private: System::Windows::Forms::Button^ editBtn;
-
-
-
-
 	private: System::Windows::Forms::Button^ delBtn;
-
 	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::Panel^ panel2;
 	private: System::Windows::Forms::Panel^ panel3;
@@ -85,6 +106,7 @@ namespace GeniusBooks {
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
 			this->panel3 = (gcnew System::Windows::Forms::Panel());
 			this->panel4 = (gcnew System::Windows::Forms::Panel());
+			this->userLabel = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// nameLabel
@@ -92,7 +114,7 @@ namespace GeniusBooks {
 			this->nameLabel->AutoSize = true;
 			this->nameLabel->Font = (gcnew System::Drawing::Font(L"Mulish ExtraBold", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->nameLabel->Location = System::Drawing::Point(12, 9);
+			this->nameLabel->Location = System::Drawing::Point(12, 27);
 			this->nameLabel->Name = L"nameLabel";
 			this->nameLabel->Size = System::Drawing::Size(186, 33);
 			this->nameLabel->TabIndex = 0;
@@ -103,7 +125,7 @@ namespace GeniusBooks {
 			this->emailLabel->AutoSize = true;
 			this->emailLabel->Font = (gcnew System::Drawing::Font(L"Mulish", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->emailLabel->Location = System::Drawing::Point(14, 42);
+			this->emailLabel->Location = System::Drawing::Point(22, 234);
 			this->emailLabel->Name = L"emailLabel";
 			this->emailLabel->Size = System::Drawing::Size(202, 20);
 			this->emailLabel->TabIndex = 1;
@@ -180,6 +202,7 @@ namespace GeniusBooks {
 			this->editBtn->TabIndex = 9;
 			this->editBtn->Text = L"Edit Profile";
 			this->editBtn->UseVisualStyleBackColor = false;
+			this->editBtn->Click += gcnew System::EventHandler(this, &UserDetailsPopup::editBtn_Click);
 			// 
 			// delBtn
 			// 
@@ -195,6 +218,7 @@ namespace GeniusBooks {
 			this->delBtn->TabIndex = 10;
 			this->delBtn->Text = L"Delete Profile";
 			this->delBtn->UseVisualStyleBackColor = false;
+			this->delBtn->Click += gcnew System::EventHandler(this, &UserDetailsPopup::delBtn_Click);
 			// 
 			// panel1
 			// 
@@ -228,12 +252,22 @@ namespace GeniusBooks {
 			this->panel4->Size = System::Drawing::Size(86, 71);
 			this->panel4->TabIndex = 14;
 			// 
+			// userLabel
+			// 
+			this->userLabel->AutoSize = true;
+			this->userLabel->Location = System::Drawing::Point(15, 9);
+			this->userLabel->Name = L"userLabel";
+			this->userLabel->Size = System::Drawing::Size(42, 18);
+			this->userLabel->TabIndex = 15;
+			this->userLabel->Text = L"USER";
+			// 
 			// UserDetailsPopup
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 18);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Azure;
 			this->ClientSize = System::Drawing::Size(508, 329);
+			this->Controls->Add(this->userLabel);
 			this->Controls->Add(this->panel4);
 			this->Controls->Add(this->panel3);
 			this->Controls->Add(this->panel2);
@@ -264,5 +298,23 @@ namespace GeniusBooks {
 
 		}
 #pragma endregion
-	};
+
+	private: System::Void editBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		editUserPopup->loadUserDetails(userId);
+		editUserPopup->ShowDialog();
+		this->Hide();
+	}
+	private: System::Void delBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		try {
+			String^ query = "DELETE FROM UsersTable WHERE id=" + userId;
+			conn->SetData(query);
+			this->Close();
+		}
+		catch (Exception^ e) {
+			if (MessageBox::Show(e->Message, "Unexpected Error", MessageBoxButtons::OK) == System::Windows::Forms::DialogResult::OK) {
+				Application::Exit();
+			}
+		}
+	}
+};
 }

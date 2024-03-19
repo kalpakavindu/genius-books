@@ -1,4 +1,7 @@
 #pragma once
+#include "../Database.h"
+#include "../Popups/EditSupplierPopup.h"
+#include "../Popups/SupplierDetailsPopup.h"
 
 namespace GeniusBooks {
 
@@ -14,47 +17,71 @@ namespace GeniusBooks {
 	/// </summary>
 	public ref class SuppliersPanel : public System::Windows::Forms::Form
 	{
-	public:
-		SuppliersPanel(void)
-		{
-			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
-		}
+		private: 
+			Database^ conn;
+			EditSupplierPopup^ editSupplierPopup;
+			SupplierDetailsPopup^ supplierDataPopup;
 
-	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		~SuppliersPanel()
-		{
-			if (components)
-			{
-				delete components;
+			void openAddSupplierPopup() {
+				editSupplierPopup->Text = "Add New Supplier";
+				editSupplierPopup->saveBtn->Hide();
+				editSupplierPopup->addBtn->Show();
+				editSupplierPopup->ShowDialog();
 			}
-		}
-	private: System::Windows::Forms::Panel^ panel1;
-	protected:
-	private: System::Windows::Forms::Button^ addBtn;
 
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Panel^ panel2;
-	private: System::Windows::Forms::DataGridView^ dataGrid;
+			void loadData() {
+				try {
+					String^ query = "SELECT * FROM SuppliersTable";
+					DataTable^ supplierDetails = conn->GetData(query);
+					dataGrid->DataSource = supplierDetails;
+				}
+				catch (Exception^ e) {
+					if (MessageBox::Show(e->Message, "Unexpected Error", MessageBoxButtons::OK) == System::Windows::Forms::DialogResult::OK) {
+						Application::Exit();
+					}
+				}
+			}
+
+		public:
+			SuppliersPanel(void)
+			{
+				InitializeComponent();
+				conn = gcnew Database();
+				editSupplierPopup = gcnew EditSupplierPopup();
+				editSupplierPopup->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &SuppliersPanel::formClosed);
+
+				loadData();
+			}
+
+		protected:
+			/// <summary>
+			/// Clean up any resources being used.
+			/// </summary>
+			~SuppliersPanel()
+			{
+				if (components)
+				{
+					delete components;
+				}
+			}
+		private: System::Windows::Forms::Panel^ panel1;
+		protected:
+		private: System::Windows::Forms::Button^ addBtn;
+
+		private: System::Windows::Forms::Label^ label1;
+		private: System::Windows::Forms::Panel^ panel2;
+		private: System::Windows::Forms::DataGridView^ dataGrid;
 
 
-	protected:
+		protected:
 
+		private:
+			/// <summary>
+			/// Required designer variable.
+			/// </summary>
+			System::ComponentModel::Container ^components;
 
-
-
-	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		System::ComponentModel::Container ^components;
-
-#pragma region Windows Form Designer generated code
+	#pragma region Windows Form Designer generated code
 		/// <summary>
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
@@ -98,6 +125,7 @@ namespace GeniusBooks {
 			this->addBtn->TabIndex = 2;
 			this->addBtn->Text = L"Add Supplier";
 			this->addBtn->UseVisualStyleBackColor = false;
+			this->addBtn->Click += gcnew System::EventHandler(this, &SuppliersPanel::addBtn_Click);
 			// 
 			// label1
 			// 
@@ -134,12 +162,13 @@ namespace GeniusBooks {
 			this->dataGrid->ReadOnly = true;
 			this->dataGrid->Size = System::Drawing::Size(774, 477);
 			this->dataGrid->TabIndex = 0;
+			this->dataGrid->CellDoubleClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &SuppliersPanel::dataGrid_CellDoubleClick);
 			// 
 			// SuppliersPanel
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 18);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::Azure;
+			this->BackColor = System::Drawing::Color::LightCyan;
 			this->ClientSize = System::Drawing::Size(798, 561);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
@@ -147,8 +176,6 @@ namespace GeniusBooks {
 				static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(4);
-			this->MaximizeBox = false;
-			this->MaximumSize = System::Drawing::Size(798, 561);
 			this->MinimizeBox = false;
 			this->MinimumSize = System::Drawing::Size(798, 561);
 			this->Name = L"SuppliersPanel";
@@ -163,5 +190,20 @@ namespace GeniusBooks {
 
 		}
 #pragma endregion
-	};
+
+		private: System::Void addBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+			openAddSupplierPopup();
+		}
+
+		private: System::Void formClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
+			loadData();
+		}
+
+		private: System::Void dataGrid_CellDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+			int supplierId = safe_cast<int>(dataGrid->Rows[e->RowIndex]->Cells[0]->Value);
+			supplierDataPopup = gcnew SupplierDetailsPopup(supplierId);
+			supplierDataPopup->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &SuppliersPanel::formClosed);
+			supplierDataPopup->ShowDialog();
+		}
+};
 }

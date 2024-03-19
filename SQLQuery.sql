@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[User] (
+﻿CREATE TABLE [dbo].[UsersTable] (
   [id] INT PRIMARY KEY IDENTITY(1, 1) NOT NULL,
   [first_name] VARCHAR(20) NOT NULL,
   [last_name] VARCHAR(20) NOT NULL,
@@ -12,7 +12,7 @@
 )
 GO
 
-CREATE TABLE [dbo].[Supplier] (
+CREATE TABLE [dbo].[SuppliersTable] (
   [id] INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
   [name] VARCHAR(70) NOT NULL,
   [address] VARCHAR(100) NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE [dbo].[Supplier] (
 )
 GO
 
-CREATE TABLE [dbo].[Book] (
+CREATE TABLE [dbo].[BooksTable] (
   [isbn] INT PRIMARY KEY NOT NULL,
   [title] VARCHAR(100) NOT NULL,
   [author] VARCHAR(70) NOT NULL,
@@ -32,11 +32,11 @@ CREATE TABLE [dbo].[Book] (
   [stock_qty] INT DEFAULT (0),
   [supplier] INT NOT NULL,
   [created_at] TIMESTAMP NOT NULL,
-  CONSTRAINT [FK_Book2Supplier] FOREIGN KEY ([supplier]) REFERENCES [dbo].[Supplier] ([id])
+  CONSTRAINT [FK_Book2Supplier] FOREIGN KEY ([supplier]) REFERENCES [dbo].[SuppliersTable] ([id])
 )
 GO
 
-CREATE TABLE [dbo].[Order] (
+CREATE TABLE [dbo].[OrdersTable] (
   [id] INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
   [user] INT NOT NULL,
   [supplier] INT NOT NULL,
@@ -44,8 +44,8 @@ CREATE TABLE [dbo].[Order] (
   [qty] INT DEFAULT 0,
   [status] INT DEFAULT 0,
   [created_at] TIMESTAMP NOT NULL,
-  CONSTRAINT [FK_Order2User] FOREIGN KEY ([user]) REFERENCES [dbo].[User] ([id]),
-  CONSTRAINT [FK_Order2Supplier] FOREIGN KEY ([supplier]) REFERENCES [dbo].[Supplier] ([id]),
-  CONSTRAINT [FK_Order2Book] FOREIGN KEY ([book]) REFERENCES [dbo].[Book] ([isbn])
+  CONSTRAINT [FK_Order2User] FOREIGN KEY ([user]) REFERENCES [dbo].[UsersTable] ([id]),
+  CONSTRAINT [FK_Order2Supplier] FOREIGN KEY ([supplier]) REFERENCES [dbo].[SuppliersTable] ([id]),
+  CONSTRAINT [FK_Order2Book] FOREIGN KEY ([book]) REFERENCES [dbo].[BooksTable] ([isbn])
 )
 GO
