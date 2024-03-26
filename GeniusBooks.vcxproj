@@ -120,21 +120,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Forms\AdminForm.cpp" />
-    <ClCompile Include="Forms\AuthForm.cpp" />
-    <ClCompile Include="Panels\BooksPanel.cpp" />
-    <ClCompile Include="Panels\DashboardPanel.cpp" />
-    <ClCompile Include="Panels\LoginPanel.cpp" />
-    <ClCompile Include="Panels\RegisterPanel.cpp" />
-    <ClCompile Include="Panels\SuppliersPanel.cpp" />
-    <ClCompile Include="Panels\UsersPanel.cpp" />
-    <ClCompile Include="Popups\BookDetailsPopup.cpp" />
-    <ClCompile Include="Popups\EditBookPopup.cpp" />
-    <ClCompile Include="Popups\EditOrderPopup.cpp" />
-    <ClCompile Include="Popups\EditSupplierPopup.cpp" />
-    <ClCompile Include="Popups\EditUserPopup.cpp" />
-    <ClCompile Include="Popups\SupplierDetailsPopup.cpp" />
-    <ClCompile Include="Popups\UserDetailsPopup.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
